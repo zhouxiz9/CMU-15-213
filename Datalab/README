@@ -11,20 +11,20 @@ tests in btest without violating any of the coding guidelines.
 0. Files:
 *********
 
-Makefile	- Makes btest, fshow, and ishow
-README		- This file
-bits.c		- The file you will be modifying and handing in
-bits.h		- Header file
-btest.c		- The main btest program
-  btest.h	- Used to build btest
-  decl.c	- Used to build btest
+Makefile  - Makes btest, fshow, and ishow
+README    - This file
+bits.c    - The file you will be modifying and handing in
+bits.h    - Header file
+btest.c   - The main btest program
+  btest.h - Used to build btest
+  decl.c  - Used to build btest
   tests.c       - Used to build btest
   tests-header.c- Used to build btest
-dlc*		- Rule checking compiler binary (data lab compiler)	 
-driver.pl*	- Driver program that uses btest and dlc to autograde bits.c
+dlc*    - Rule checking compiler binary (data lab compiler)  
+driver.pl*  - Driver program that uses btest and dlc to autograde bits.c
 Driverhdrs.pm   - Header file for optional "Beat the Prof" contest
-fshow.c		- Utility for examining floating-point representations
-ishow.c		- Utility for examining integer representations
+fshow.c   - Utility for examining floating-point representations
+ishow.c   - Utility for examining integer representations
 
 ***********************************************************
 1. Modifying bits.c and checking it for compliance with dlc
@@ -43,7 +43,7 @@ dlc returns silently if there are no problems with your code.
 Otherwise it prints messages that flag any problems.  Running dlc with
 the -e switch:
 
-    	unix> ./dlc -e bits.c  
+      unix> ./dlc -e bits.c  
 
 causes dlc to print counts of the number of operators used by each function.
 
@@ -121,10 +121,10 @@ single decimal or hex number as an argument. To build them type:
 Example usages:
 
     unix> ./ishow 0x27
-    Hex = 0x00000027,	Signed = 39,	Unsigned = 39
+    Hex = 0x00000027, Signed = 39,  Unsigned = 39
 
     unix> ./ishow 27
-    Hex = 0x0000001b,	Signed = 27,	Unsigned = 27
+    Hex = 0x0000001b, Signed = 27,  Unsigned = 27
 
     unix> ./fshow 0x15213243
     Floating point value 3.255334057e-26
@@ -143,20 +143,20 @@ Example usages:
 4. My latest result
 *******************
 
-Correctness Results	Perf Results
-Points	Rating	Errors	Points	Ops	Puzzle
-1	      1	      0	      2	      7	  bitXor
-1	      1	      0	      2	      1	  tmin
-1	      1	      0	      2	      10	isTmax
-2	      2	      0	      2	      10	allOddBits
-2	      2	      0	      2	      2	  negate
-3	      3	      0     	2	      15	isAsciiDigit
-3	      3     	0      	2	      9	  conditional
-3	      3     	0	      2	      21	isLessOrEqual
-4	      4     	0	      2	      12	logicalNeg
-0	      4     	1      	0	      0	  howManyBits
-0	      4     	1      	0	      0	  floatScale2
-0	      4     	1      	0	      0	  floatFloat2Int
-0	      4     	1      	0	      0	  floatPower2
+Correctness Results Perf Results
+Points  Rating  Errors  Points  Ops Puzzle
+1       1       0       2       7   bitXor
+1       1       0       2       1   tmin
+1       1       0       2       10  isTmax
+2       2       0       2       10  allOddBits
+2       2       0       2       2   negate
+3       3       0       2       15  isAsciiDigit
+3       3       0       2       9   conditional
+3       3       0       2       21  isLessOrEqual
+4       4       0       2       12  logicalNeg
+0       4       1       0       0   howManyBits
+0       4       1       0       0   floatScale2
+0       4       1       0       0   floatFloat2Int
+0       4       1       0       0   floatPower2
 
 Score = 38/62 [20/36 Corr + 18/26 Perf] (87 total operators)
