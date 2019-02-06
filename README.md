@@ -2,6 +2,7 @@
 
 ## Progress
 
+- [x] Lab 0 - C Programming Lab
 - [x] Lab 1 - Data Lab
 - [x] Lab 2 - Bomb Lab
 - [X] Lab 3 - Attack Lab
