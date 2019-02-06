@@ -49,3 +49,60 @@ traces/trace-XX-CAT.cmd Trace files used by the driver.  These are input files f
                         XX is the trace number (1-15).  CAT describes the general nature of the test.
 
 traces/trace-eg.cmd:    A simple, documented trace file to demonstrate the operation of qtest
+
+
+
+*********
+My result
+*********
+
+chmod +x driver.py
+./driver.py
+--- Trace       Points
++++ TESTING trace trace-01-ops:
+# Test of insert_head and remove_head
+--- trace-01-ops    6/6
++++ TESTING trace trace-02-ops:
+# Test of insert_head, insert_tail, and remove_head
+--- trace-02-ops    6/6
++++ TESTING trace trace-03-ops:
+# Test of insert_head, insert_tail, reverse, and remove_head
+--- trace-03-ops    6/6
++++ TESTING trace trace-04-ops:
+# Test of insert_head, insert_tail, and size
+--- trace-04-ops    6/6
++++ TESTING trace trace-05-ops:
+# Test of insert_head, insert_tail, remove_head reverse, and size
+--- trace-05-ops    6/6
++++ TESTING trace trace-06-string:
+# Test of truncated strings
+--- trace-06-string 7/7
++++ TESTING trace trace-07-robust:
+# Test operations on NULL queue
+--- trace-07-robust 7/7
++++ TESTING trace trace-08-robust:
+# Test operations on empty queue
+--- trace-08-robust 7/7
++++ TESTING trace trace-09-robust:
+# Test remove_head with NULL argument
+--- trace-09-robust 7/7
++++ TESTING trace trace-10-malloc:
+# Test of malloc failure on new
+--- trace-10-malloc 7/7
++++ TESTING trace trace-11-malloc:
+# Test of malloc failure on insert_head
+--- trace-11-malloc 7/7
++++ TESTING trace trace-12-malloc:
+# Test of malloc failure on insert_tail
+--- trace-12-malloc 7/7
++++ TESTING trace trace-13-perf:
+# Test performance of insert_tail
+--- trace-13-perf   7/7
++++ TESTING trace trace-14-perf:
+# Test performance of size
+--- trace-14-perf   7/7
++++ TESTING trace trace-15-perf:
+# Test performance of insert_tail, size, and reverse
+--- trace-15-perf   7/7
+--- TOTAL       100/100
+
