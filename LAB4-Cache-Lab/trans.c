@@ -188,7 +188,47 @@ void trans_61(int M, int N, int A[N][M], int B[M][N])
 char trans_64_desc[] = "Transpose 64 submission";
 void trans_64(int M, int N, int A[N][M], int B[M][N])
 {
+    for (int ii = 0; ii < 64; ii += 4) {
+        for (int jj = 0; jj < 64; jj += 4) {
 
+            int n0, n1, n2, n3;
+            // int n4, n5, n6, n7;
+
+            for (int i = ii; i < ii + 4; i++) {
+                for (int j = jj; j < jj + 4; j++) {
+                    if (abs(i - j) % 4 == 0) {
+                        if (i % 4 == 0) {
+                            n0 = A[i][j];
+                        } else if (i % 4 == 1) {
+                            n1 = A[i][j];
+                        } else if (i % 4 == 2) {
+                            n2 = A[i][j];
+                        } else if (i % 4 == 3) {
+                            n3 = A[i][j];
+                        }
+                    } else {
+                        B[j][i] = A[i][j];
+                    }
+                }
+            }
+
+            for (int i = ii; i < ii + 4; i++) {
+                for (int j = jj; j < jj + 4; j++) {
+                    if (abs(i - j) % 4 == 0) {
+                        if (i % 4 == 0) {
+                            B[j][i] = n0;
+                        } else if (i % 4 == 1) {
+                            B[j][i] = n1;
+                        } else if (i % 4 == 2) {
+                            B[j][i] = n2;
+                        } else if (i % 4 == 3) {
+                            B[j][i] = n3;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 
