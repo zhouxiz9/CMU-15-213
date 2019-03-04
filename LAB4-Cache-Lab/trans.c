@@ -188,9 +188,9 @@ void trans_61(int M, int N, int A[N][M], int B[M][N])
 char trans_64_desc[] = "Transpose 64 submission";
 void trans_64(int M, int N, int A[N][M], int B[M][N])
 {
-    for (int ii = 0; ii < 64; ii += 4) {
-        for (int jj = 0; jj < 64; jj += 4) {
-
+    for (int jj = 0; jj < 64; jj += 4) {
+        for (int ii = 0; ii < 64; ii += 4) {
+    
             int n0, n1, n2, n3;
             // int n4, n5, n6, n7;
 
@@ -212,6 +212,7 @@ void trans_64(int M, int N, int A[N][M], int B[M][N])
                 }
             }
 
+
             for (int i = ii; i < ii + 4; i++) {
                 for (int j = jj; j < jj + 4; j++) {
                     if (abs(i - j) % 4 == 0) {
@@ -230,8 +231,6 @@ void trans_64(int M, int N, int A[N][M], int B[M][N])
         }
     }
 }
-
-
 
 
 /* 
@@ -264,7 +263,7 @@ void registerFunctions()
     registerTransFunction(transpose_submit, transpose_submit_desc); 
 
     /* Register any additional transpose functions */
-    registerTransFunction(trans, trans_desc); 
+    // registerTransFunction(trans, trans_desc); 
 }
 
 /* 
