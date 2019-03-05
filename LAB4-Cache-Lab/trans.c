@@ -41,61 +41,24 @@ void transpose_submit(int M, int N, int A[N][M], int B[M][N])
 char trans_32_desc[] = "Transpose 32 submission";
 void trans_32(int M, int N, int A[N][M], int B[M][N])
 {  
+    int ii, jj, i, j, tmp, prev;
+    for (ii = 0; ii < 32; ii += 8) {
+        for (jj = 0; jj < 32; jj += 8) {
 
-    for (int ii = 0; ii < 32; ii += 8) {
-        for (int jj = 0; jj < 32; jj += 8) {
-
-            int n0, n1, n2, n3, n4, n5, n6, n7;
-
-            for (int i = ii; i < ii + 8; i++) {
-                for (int j = jj; j < jj + 8; j++) {
+            for (i = ii; i < ii + 8; i++) {
+                for (j = jj; j < jj + 8; j++) {
+                    tmp = A[i][j];
                     if (i == j) {
-                        if (i % 8 == 0) {
-                            n0 = A[i][j];
-                        } else if (i % 8 == 1) {
-                            n1 = A[i][j];
-                        } else if (i % 8 == 2) {
-                            n2 = A[i][j];
-                        } else if (i % 8 == 3) {
-                            n3 = A[i][j];
-                        } else if (i % 8 == 4) {
-                            n4 = A[i][j];
-                        } else if (i % 8 == 5) {
-                            n5 = A[i][j];
-                        } else if (i % 8 == 6) {
-                            n6 = A[i][j];
-                        } else if (i % 8 == 7) {
-                            n7 = A[i][j];
+                        if (i > 0) {
+                            B[j - 1][i - 1] = prev;
                         }
+                        prev = tmp;
                     } else {
-                        B[j][i] = A[i][j];
+                        B[j][i] = tmp;
                     }
                 }
             }
-
-            for (int i = ii; i < ii + 8; i++) {
-                for (int j = jj; j < jj + 8; j++) {
-                    if (i == j) {
-                        if (j % 8 == 0) {
-                            B[j][i] = n0;
-                        } else if (j % 8 == 1) {
-                            B[j][i] = n1;
-                        } else if (j % 8 == 2) {
-                            B[j][i] = n2;
-                        } else if (j % 8 == 3) {
-                            B[j][i] = n3;
-                        } else if (j % 8 == 4) {
-                            B[j][i] = n4;
-                        } else if (j % 8 == 5) {
-                            B[j][i] = n5;
-                        } else if (j % 8 == 6) {
-                            B[j][i] = n6;
-                        } else if (j % 8 == 7) {
-                            B[j][i] = n7;
-                        }
-                    }
-                }
-            }
+            B[jj + 7][ii + 7] = A[ii + 7][jj + 7];
         }
     }
 }
@@ -104,85 +67,82 @@ void trans_32(int M, int N, int A[N][M], int B[M][N])
 char trans_61_desc[] = "Transpose 61 submission";
 void trans_61(int M, int N, int A[N][M], int B[M][N])
 {
-    int n0, n1, n2, n3, n4, n5, n6, n7;
+    int ii, jj, i, j, tmp, prev;
 
-    for (int jj = 0; jj < 56; jj += 8) {
-        for (int ii = 0; ii < 64; ii += 8) {
+    for (jj = 0; jj < 56; jj += 8) {
+        for (ii = 0; ii < 64; ii += 8) {
 
-            for (int i = ii; i < ii + 8; i++) {
-                for (int j = jj; j < jj + 8; j++) {
+             for (i = ii; i < ii + 8; i++) {
+                for (j = jj; j < jj + 8; j++) {
+                    tmp = A[i][j];
                     if (i == j) {
-                        if (i % 8 == 0) {
-                            n0 = A[i][j];
-                        } else if (i % 8 == 1) {
-                            n1 = A[i][j];
-                        } else if (i % 8 == 2) {
-                            n2 = A[i][j];
-                        } else if (i % 8 == 3) {
-                            n3 = A[i][j];
-                        } else if (i % 8 == 4) {
-                            n4 = A[i][j];
-                        } else if (i % 8 == 5) {
-                            n5 = A[i][j];
-                        } else if (i % 8 == 6) {
-                            n6 = A[i][j];
-                        } else if (i % 8 == 7) {
-                            n7 = A[i][j];
+                        if (i > 0) {
+                            B[j - 1][i - 1] = prev;
                         }
+                        prev = tmp;
                     } else {
-                        B[j][i] = A[i][j];
-                    }
-                }
-            }  
-
-            for (int i = ii; i < ii + 8; i++) {
-                for (int j = jj; j < jj + 8; j++) {
-                    if (i == j) {
-                        if (j % 8 == 0) {
-                            B[j][i] = n0;
-                        } else if (j % 8 == 1) {
-                            B[j][i] = n1;
-                        } else if (j % 8 == 2) {
-                            B[j][i] = n2;
-                        } else if (j % 8 == 3) {
-                            B[j][i] = n3;
-                        } else if (j % 8 == 4) {
-                            B[j][i] = n4;
-                        } else if (j % 8 == 5) {
-                            B[j][i] = n5;
-                        } else if (j % 8 == 6) {
-                            B[j][i] = n6;
-                        } else if (j % 8 == 7) {
-                            B[j][i] = n7;
-                        }
+                        B[j][i] = tmp;
                     }
                 }
             }
+            B[jj + 7][ii + 7] = A[ii + 7][jj + 7];
         }
     }
 
-    for (int jj = 0; jj < 56; jj += 8) {
-        for (int ii = 64; ii < 67; ii++) {
-            for (int j = jj; j < jj + 8; j++) {
+    for (jj = 0; jj < 56; jj += 8) {
+        for (ii = 64; ii < 67; ii++) {
+            for (j = jj; j < jj + 8; j++) {
                 B[j][ii] = A[ii][j];
             }
         }
     }
 
-    for (int ii = 0; ii < 64; ii += 8) {
-        for (int jj = 56; jj < 61; jj++) {
-            for (int i = ii; i < ii + 8; i++) {
+    for (ii = 0; ii < 64; ii += 8) {
+        for (jj = 56; jj < 61; jj++) {
+            for (i = ii; i < ii + 8; i++) {
                 B[jj][i] = A[i][jj];
             }
         }
     }
    
 
-    for (int ii = 64; ii < 67; ii++) {
-        for (int jj = 56; jj < 61; jj++) {
+    for (ii = 64; ii < 67; ii++) {
+        for (jj = 56; jj < 61; jj++) {
             B[jj][ii] = A[ii][jj];
         }
     }
+}
+
+void helper2(int ii, int jj, int A[64][64], int B[64][64]) {
+    int n0, n1, n2, n3, n4, n5;
+
+    n0 = A[ii][jj + 1];
+    n1 = A[ii][jj + 2];
+    n2 = A[ii][jj + 3];
+    n3 = A[ii + 1][jj + 2];
+    n4 = A[ii + 1][jj + 3];
+    n5 = A[ii + 2][jj + 3];
+
+    for (int i = ii; i < ii + 4; i++) {
+        B[jj][i] = A[i][jj];
+    }
+
+    for (int i = ii + 1; i < ii + 4; i++) {
+        B[jj + 1][i] = A[i][jj + 1];
+    }
+
+    for (int i = ii + 2; i < ii + 4; i++) {
+        B[jj + 2][i] = A[i][jj + 2];
+    }
+
+    B[jj + 3][ii + 3] = A[ii + 3][jj + 3];
+
+    B[jj + 1][ii] = n0;
+    B[jj + 2][ii] = n1;
+    B[jj + 3][ii] = n2;
+    B[jj + 2][ii + 1] = n3;
+    B[jj + 3][ii + 1] = n4;
+    B[jj + 3][ii + 2] = n5;
 }
 
 char trans_64_desc[] = "Transpose 64 submission";
@@ -190,88 +150,15 @@ void trans_64(int M, int N, int A[N][M], int B[M][N])
 {
     int flag = 1;
 
-    for (int jj = 0; jj < 64; jj += 4) {
+    for (int ii = 0; ii < 64; ii += 4) {
+
         if (flag == 1) {
-            for (int ii = 0; ii < 64; ii += 4) {
-    
-                int n0, n1, n2, n3;
-                // int n4, n5, n6, n7;
-
-                for (int i = ii; i < ii + 4; i++) {
-                    for (int j = jj; j < jj + 4; j++) {
-                        if (abs(i - j) % 4 == 0) {
-                            if (i % 4 == 0) {
-                                n0 = A[i][j];
-                            } else if (i % 4 == 1) {
-                                n1 = A[i][j];
-                            } else if (i % 4 == 2) {
-                                n2 = A[i][j];
-                            } else if (i % 4 == 3) {
-                                n3 = A[i][j];
-                            }
-                        } else {
-                            B[j][i] = A[i][j];
-                        }
-                    }
-                }
-
-
-                for (int i = ii; i < ii + 4; i++) {
-                    for (int j = jj; j < jj + 4; j++) {
-                        if (abs(i - j) % 4 == 0) {
-                            if (i % 4 == 0) {
-                                B[j][i] = n0;
-                            } else if (i % 4 == 1) {
-                                B[j][i] = n1;
-                            } else if (i % 4 == 2) {
-                                B[j][i] = n2;
-                            } else if (i % 4 == 3) {
-                                B[j][i] = n3;
-                            }
-                        }
-                    }
-                }
+            for (int jj = 0; jj < 64; jj += 4) {
+                helper2(ii, jj, A, B);   
             }
         } else {
-            for (int ii = 60; ii >= 0; ii -= 4) {
-    
-                int n0, n1, n2, n3;
-                // int n4, n5, n6, n7;
-
-                for (int i = ii; i < ii + 4; i++) {
-                    for (int j = jj; j < jj + 4; j++) {
-                        if (abs(i - j) % 4 == 0) {
-                            if (i % 4 == 0) {
-                                n0 = A[i][j];
-                            } else if (i % 4 == 1) {
-                                n1 = A[i][j];
-                            } else if (i % 4 == 2) {
-                                n2 = A[i][j];
-                            } else if (i % 4 == 3) {
-                                n3 = A[i][j];
-                            }
-                        } else {
-                            B[j][i] = A[i][j];
-                        }
-                    }
-                }
-
-
-                for (int i = ii; i < ii + 4; i++) {
-                    for (int j = jj; j < jj + 4; j++) {
-                        if (abs(i - j) % 4 == 0) {
-                            if (i % 4 == 0) {
-                                B[j][i] = n0;
-                            } else if (i % 4 == 1) {
-                                B[j][i] = n1;
-                            } else if (i % 4 == 2) {
-                                B[j][i] = n2;
-                            } else if (i % 4 == 3) {
-                                B[j][i] = n3;
-                            }
-                        }
-                    }
-                }
+            for (int jj = 60; jj >= 0; jj -= 4) {
+                helper2(ii, jj, A, B);
             }
         }
         flag = flag == 1 ? 0 : 1;
