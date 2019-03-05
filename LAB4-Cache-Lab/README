@@ -37,3 +37,16 @@ test-csim*   Tests your cache simulator
 test-trans.c Tests your transpose function
 tracegen.c   Helper program used by test-trans
 traces/      Trace files used by test-csim.c
+
+
+**********
+My result:
+**********
+
+Cache Lab summary:
+                        Points   Max pts      Misses
+Csim correctness          27.0        27
+Trans perf 32x32           8.0         8         290
+Trans perf 64x64           8.0         8        1267
+Trans perf 61x67          10.0        10        1976
+          Total points    53.0        53
