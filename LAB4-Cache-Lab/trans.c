@@ -148,20 +148,39 @@ void helper2(int ii, int jj, int A[64][64], int B[64][64]) {
 char trans_64_desc[] = "Transpose 64 submission";
 void trans_64(int M, int N, int A[N][M], int B[M][N])
 {
-    int flag = 1;
-
-    for (int ii = 0; ii < 64; ii += 4) {
-
-        if (flag == 1) {
-            for (int jj = 0; jj < 64; jj += 4) {
-                helper2(ii, jj, A, B);   
-            }
-        } else {
-            for (int jj = 60; jj >= 0; jj -= 4) {
+    for (int ii = 0; ii < 64; ii += 8) {
+        for (int jj = 0; jj < 64; jj += 8) {
+            if (ii == jj) {
                 helper2(ii, jj, A, B);
+                helper2(ii, jj + 4, A, B);
+                helper2(ii + 4, jj, A, B);
+                helper2(ii + 4, jj + 4, A, B);
+            } else {
+                for (int i = ii; i < ii + 4; i++) {
+                    for (int j = jj; j < jj + 4; j++) {
+                        B[j][i] = A[i][j];
+                    }
+                }
+
+                for (int i = ii; i < ii + 4; i++) {
+                    for (int j = jj + 4; j < jj + 8; j++) {
+                        B[j][i] = A[i][j];
+                    }
+                }
+
+                for (int i = ii + 4; i < ii + 8; i++) {
+                    for (int j = jj + 4; j < jj + 8; j++) {
+                        B[j][i] = A[i][j];
+                    }
+                }
+
+                for (int i = ii + 4; i < ii + 8; i++) {
+                    for (int j = jj; j < jj + 4; j++) {
+                        B[j][i] = A[i][j];
+                    }
+                }
             }
         }
-        flag = flag == 1 ? 0 : 1;
     }
 }
 
