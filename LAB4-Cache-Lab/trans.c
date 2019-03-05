@@ -41,7 +41,7 @@ void transpose_submit(int M, int N, int A[N][M], int B[M][N])
 char trans_32_desc[] = "Transpose 32 submission";
 void trans_32(int M, int N, int A[N][M], int B[M][N])
 {  
-    int ii, jj, i, j, tmp, prev;
+    int ii, jj, i, j, tmp, prev; // 6 variables
     for (ii = 0; ii < 32; ii += 8) {
         for (jj = 0; jj < 32; jj += 8) {
 
@@ -67,7 +67,7 @@ void trans_32(int M, int N, int A[N][M], int B[M][N])
 char trans_61_desc[] = "Transpose 61 submission";
 void trans_61(int M, int N, int A[N][M], int B[M][N])
 {
-    int ii, jj, i, j, tmp, prev;
+    int ii, jj, i, j, tmp, prev; // 6 variables
 
     for (jj = 0; jj < 56; jj += 8) {
         for (ii = 0; ii < 64; ii += 8) {
@@ -114,7 +114,7 @@ void trans_61(int M, int N, int A[N][M], int B[M][N])
 }
 
 void helper2(int ii, int jj, int A[64][64], int B[64][64]) {
-    int n0, n1, n2, n3, n4, n5;
+    int i, n0, n1, n2, n3, n4, n5; // 7 variables
 
     n0 = A[ii][jj + 1];
     n1 = A[ii][jj + 2];
@@ -123,15 +123,15 @@ void helper2(int ii, int jj, int A[64][64], int B[64][64]) {
     n4 = A[ii + 1][jj + 3];
     n5 = A[ii + 2][jj + 3];
 
-    for (int i = ii; i < ii + 4; i++) {
+    for (i = ii; i < ii + 4; i++) {
         B[jj][i] = A[i][jj];
     }
 
-    for (int i = ii + 1; i < ii + 4; i++) {
+    for (i = ii + 1; i < ii + 4; i++) {
         B[jj + 1][i] = A[i][jj + 1];
     }
 
-    for (int i = ii + 2; i < ii + 4; i++) {
+    for (i = ii + 2; i < ii + 4; i++) {
         B[jj + 2][i] = A[i][jj + 2];
     }
 
@@ -145,40 +145,63 @@ void helper2(int ii, int jj, int A[64][64], int B[64][64]) {
     B[jj + 3][ii + 2] = n5;
 }
 
+
 char trans_64_desc[] = "Transpose 64 submission";
 void trans_64(int M, int N, int A[N][M], int B[M][N])
 {
-    for (int ii = 0; ii < 64; ii += 8) {
-        for (int jj = 0; jj < 64; jj += 8) {
+    // 12 variables
+    int ii, jj, i, j, n0, n1, n2, n3, n4, n5, n6, n7;
+
+    for (ii = 0; ii < 64; ii += 8) {
+        for (jj = 0; jj < 64; jj += 8) {
             if (ii == jj) {
                 helper2(ii, jj, A, B);
                 helper2(ii, jj + 4, A, B);
                 helper2(ii + 4, jj, A, B);
                 helper2(ii + 4, jj + 4, A, B);
             } else {
-                for (int i = ii; i < ii + 4; i++) {
-                    for (int j = jj; j < jj + 4; j++) {
+                for (i = ii; i < ii + 4; i++) {
+                    for (j = jj; j < jj + 4; j++) {
                         B[j][i] = A[i][j];
                     }
                 }
 
-                for (int i = ii; i < ii + 4; i++) {
-                    for (int j = jj + 4; j < jj + 8; j++) {
+                n0 = A[ii][jj + 4];
+                n1 = A[ii][jj + 5];
+                n2 = A[ii][jj + 6];
+                n3 = A[ii][jj + 7];
+                n4 = A[ii + 1][jj + 4];
+                n5 = A[ii + 1][jj + 5];
+                n6 = A[ii + 1][jj + 6];
+                n7 = A[ii + 1][jj + 7];
+
+                for (i = ii + 4; i < ii + 8; i++) {
+                    for (j = jj; j < jj + 4; j++) {
                         B[j][i] = A[i][j];
                     }
                 }
 
-                for (int i = ii + 4; i < ii + 8; i++) {
-                    for (int j = jj + 4; j < jj + 8; j++) {
+                for (i = ii + 4; i < ii + 8; i++) {
+                    for (j = jj + 4; j < jj + 8; j++) {
                         B[j][i] = A[i][j];
                     }
                 }
 
-                for (int i = ii + 4; i < ii + 8; i++) {
-                    for (int j = jj; j < jj + 4; j++) {
+                for (i = ii + 2; i < ii + 4; i++) {
+                    for (j = jj + 4; j < jj + 8; j++) {
                         B[j][i] = A[i][j];
                     }
                 }
+
+                B[jj + 4][ii] = n0;
+                B[jj + 5][ii] = n1;
+                B[jj + 6][ii] = n2;
+                B[jj + 7][ii] = n3;
+
+                B[jj + 4][ii + 1] = n4;
+                B[jj + 5][ii + 1] = n5;
+                B[jj + 6][ii + 1] = n6;
+                B[jj + 7][ii + 1] = n7;
             }
         }
     }
