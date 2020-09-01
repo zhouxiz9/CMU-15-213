@@ -1,5 +1,7 @@
 # CMU-15-213
 
+Introduction to Computer Systems (ICS)
+
 ## Progress
 
 - [x] Lab 0 - C Programming Lab
